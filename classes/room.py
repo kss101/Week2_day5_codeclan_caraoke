@@ -6,3 +6,8 @@ class Room:
     
     def check_in_guest( self, guest_name):
         self.guest_list.append(guest_name)
+
+    def check_out_guest( self, guest_name ):
+        for guest in self.guest_list:
+            if guest == guest_name:
+                self.guest_list.remove( guest )

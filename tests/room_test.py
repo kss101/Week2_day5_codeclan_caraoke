@@ -15,4 +15,14 @@ class TestRoom(unittest.TestCase):
         guest = Guest("Sam")
         self.room1.check_in_guest( guest.name )
         self.assertEqual( 1, len(self.room1.guest_list))
+
+    def test_check_out_guest( self ):
+        guest1 = Guest("Sam")
+        guest2 = Guest("Bob")
+        self.room1.check_in_guest( guest1.name )
+        self.room1.check_in_guest( guest2.name )
+        self.room1.check_out_guest( guest1.name )
+        self.assertEqual( 1, len(self.room1.guest_list))
+        self.assertEqual(['Bob'], self.room1.guest_list)
+    
        
