@@ -6,11 +6,12 @@ from classes.song import Song
 
 class TestRoom(unittest.TestCase):
     def setUp(self):
-        self.room1 = Room("Room 1", 2)
+        self.room1 = Room("Room 1", 2, 5)
+        self.room2 = Room("Room 2", 3, 7.5)
 
-        self.guest1 = Guest("Sam")
-        self.guest2 = Guest("Bob")
-        self.guest3 = Guest("Joe")
+        self.guest1 = Guest("Sam", 5)
+        self.guest2 = Guest("Bob", 10)
+        self.guest3 = Guest("Joe", 15)
 
         self.song1 = Song("People Like Us")
 
@@ -40,3 +41,8 @@ class TestRoom(unittest.TestCase):
         self.room1.check_in_guest( self.guest2.name )
         self.assertEqual("Room full!", self.room1.check_in_guest(self.guest3.name))
         self.assertEqual(['Sam', 'Bob'], self.room1.guest_list)
+
+    def test_charge_entry_fee( self ):
+        self.room1.charge_entry_fee( self.guest1 )
+        self.assertEqual(5, self.room1.cash_total )
+        
