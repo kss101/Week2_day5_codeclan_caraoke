@@ -24,7 +24,6 @@ class Room:
 
     def charge_entry_fee( self, guest ):
         guest_payed = guest.pay_money( self.entry_fee )
-        print("Guest payed = ", guest_payed)
         if guest_payed == True:
             self.cash_total += self.entry_fee
 
