@@ -14,9 +14,10 @@ class Guest:
         check_money =  self.check_enough_money( amount )
         if check_money == True:
             self.money -= amount
-            return True
-        else:
-            return False
+         #   return True
+        #else:
+        #    return False
+        return check_money
 
     def cheer_favourite_song( self, room ):
         if self.favourite_song in room.song_list:

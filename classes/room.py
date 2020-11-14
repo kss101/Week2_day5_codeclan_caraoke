@@ -23,8 +23,9 @@ class Room:
                 self.guest_list.remove( guest )
 
     def charge_entry_fee( self, guest ):
-        guest_payed = guest.pay_money( self.entry_fee )
-        if guest_payed == True:
+        if guest.pay_money( self.entry_fee ) == True:
             self.cash_total += self.entry_fee
+        else:
+            return False
 
 

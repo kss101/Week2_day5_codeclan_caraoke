@@ -13,7 +13,9 @@ class TestRoom(unittest.TestCase):
         self.guest2 = Guest("Bob", 10)
         self.guest3 = Guest("Joe", 15)
 
-        self.song1 = Song("People Like Us")
+        self.song1 = Song( "People Like Us" )
+        self.song2 = Song( "Waterloo" )
+        self.song3 = Song( "Ice Cream" )
 
     def test_create_room( self ):
         self.assertEqual("Room 1", self.room1.name)
@@ -21,6 +23,12 @@ class TestRoom(unittest.TestCase):
     def test_add_song_to_room( self ):
         self.room1.add_song( self.song1.name )
         self.assertEqual( 1, len(self.room1.song_list))
+
+    def test_check_room_song_list( self ):
+        self.room1.add_song( self.song1.name )
+        self.room1.add_song( self.song2.name )
+        self.room1.add_song( self.song3.name )
+        self.assertEqual([ "People Like Us", "Waterloo", "Ice Cream" ], self.room1.song_list)
 
     def test_check_in_guest( self ):
         self.room1.check_in_guest( self.guest1.name )
@@ -44,5 +52,11 @@ class TestRoom(unittest.TestCase):
 
     def test_charge_entry_fee( self ):
         self.room1.charge_entry_fee( self.guest1 )
-        self.assertEqual(5, self.room1.cash_total )
+        self.room1.charge_entry_fee( self.guest2 )
+        self.assertEqual(10, self.room1.cash_total )
         
+    def test_cant_charge_entry_fee( self ):
+        self.room2.charge_entry_fee( self.guest1 )
+        self.room2.charge_entry_fee( self.guest2 )
+        self.assertEqual(False, self.room2.charge_entry_fee( self.guest1 ))
+        self.assertEqual(7.5, self.room2.cash_total )
